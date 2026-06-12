@@ -2,11 +2,14 @@
 def roman_to_int(roman_string):
     if not isinstance(roman_string, str) or roman_string is None:
         return 0
-    rom = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    r = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     res = 0
-    for i in range(len(roman_string)):
-        if i > 0 and rom.get(roman_string[i], 0) > rom.get(roman_string[i - 1], 0):
-            res += rom.get(roman_string[i], 0) - 2 * rom.get(roman_string[i - 1], 0)
+    prev = 0
+    for char in reversed(roman_string):
+        val = r.get(char, 0)
+        if val >= prev:
+            res += val
         else:
-            res += rom.get(roman_string[i], 0)
+            res -= val
+        prev = val
     return res

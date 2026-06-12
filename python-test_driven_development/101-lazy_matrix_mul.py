@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"""Module for lazy_matrix_mul."""
+"""Module for lazy_matrix_mul"""
 import numpy as np
 
 
 def lazy_matrix_mul(m_a, m_b):
-    """Multiplies 2 matrices by using NumPy."""
+    """Multiplies 2 matrices by using NumPy"""
     return np.matmul(m_a, m_b)

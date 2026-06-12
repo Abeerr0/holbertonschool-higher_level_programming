@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-"""Module for matrix_mul."""
+"""Module for matrix_mul"""
 
 
 def matrix_mul(m_a, m_b):
-    """Multiplies 2 matrices."""
+    """Multiplies 2 matrices"""
     if type(m_a) is not list:
         raise TypeError("m_a must be a list")
     if type(m_b) is not list:
@@ -21,11 +21,11 @@ def matrix_mul(m_a, m_b):
         
     for row in m_a:
         for item in row:
-            if type(item) not in [int, float]:
+            if type(item) not in (int, float):
                 raise TypeError("m_a should contain only integers or floats")
     for row in m_b:
         for item in row:
-            if type(item) not in [int, float]:
+            if type(item) not in (int, float):
                 raise TypeError("m_b should contain only integers or floats")
                 
     row_len_a = len(m_a[0])

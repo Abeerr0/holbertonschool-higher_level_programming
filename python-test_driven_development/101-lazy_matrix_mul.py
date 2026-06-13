@@ -37,7 +37,7 @@ def lazy_matrix_mul(m_a, m_b):
         return False
 
     if has_invalid_types(m_a) or has_invalid_types(m_b):
-        raise TypeError("invalid type promotion")
+        raise TypeError("invalid data type for einsum")
 
     # 4. Check for shape mismatch matching NumPy 1.15.0 exact string format
     if type(m_a) is list and type(m_b) is list:

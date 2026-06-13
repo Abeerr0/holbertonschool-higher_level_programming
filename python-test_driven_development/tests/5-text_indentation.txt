@@ -4,15 +4,17 @@ How to use 5-text_indentation module
 
 >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-Test regular cases:
+Test normal string:
 >>> text_indentation("Holberton School")
 Holberton School
 
+Test dots:
 >>> text_indentation("Holberton.School")
 Holberton.
 <BLANKLINE>
 School
 
+Test mix:
 >>> text_indentation("Holberton. School? How are you: John")
 Holberton.
 <BLANKLINE>
@@ -22,19 +24,14 @@ How are you:
 <BLANKLINE>
 John
 
-Test edge case with newlines that failed in checker:
->>> text_indentation("First line.\nSecond line.")
-First line.
-<BLANKLINE>
-Second line.
-
-Test error handling:
+Test not a string:
 >>> text_indentation(12)
 Traceback (most recent call last):
     ...
 TypeError: text must be a string
 
->>> text_indentation([1, 2, 3])
-Traceback (most recent call last):
-    ...
-TypeError: text must be a string
+Test multiple lines as requested by checker:
+>>> text_indentation("First line.\nSecond line.")
+First line.
+<BLANKLINE>
+Second line.

@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """
-This module provides a function to indent text based on specific punctuation.
+This module provides a function to format text based on specific punctuation.
 It contains one function: `text_indentation(text)`.
 """
 
 
 def text_indentation(text):
-    """Prints a text with 2 new lines after each of these characters: ., ? and :
+    """Prints a text with 2 new lines after each of '.', '?' and ':'.
 
     Args:
-        text (str): The string to format and print.
+        text (str): The text to be formatted and printed.
 
     Raises:
         TypeError: If text is not a string.
@@ -17,22 +17,26 @@ def text_indentation(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    # نستخدم المؤشر (skip_space) لتخطي أي مسافة تأتي في بداية السطر الجديد
-    skip_space = True
+    # Clean the string or process character by character safely
+    c = 0
+    # Strip leading spaces of the whole string at the start
+    text_len = len(text)
+    
+    while c < text_len and text[c] == ' ':
+        c += 1
 
-    for char in text:
-        if skip_space and char == ' ':
-            continue
-        
-        # إذا انتهى السطر الجديد بمحرف سطر جديد أصلي، يجب أيضاً تفعيل تخطي المسافة التالية
-        if char == '\n':
-            print(char, end="")
-            skip_space = True
-            continue
-
-        print(char, end="")
-        skip_space = False
-
-        if char in ['.', '?', ':']:
+    while c < text_len:
+        print(text[c], end="")
+        if text[c] in [".", "?", ":"]:
             print("\n")
-            skip_space = True
+            c += 1
+            # Skip all spaces right after the punctuation mark
+            while c < text_len and text[c] == ' ':
+                c += 1
+            # Skip any newline char to avoid creating extra blank lines
+            if c < text_len and text[c] == '\n':
+                c += 1
+                while c < text_len and text[c] == ' ':
+                    c += 1
+            continue
+        c += 1

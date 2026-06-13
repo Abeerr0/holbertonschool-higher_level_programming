@@ -1,38 +1,23 @@
 #!/usr/bin/python3
 """
-This module provides a function to format text based on specific punctuation.
-It contains one function: `text_indentation(text)`.
+Module that contains a function that prints a text with 2 new lines
+after each of these characters: ., ? and :
 """
 
 
 def text_indentation(text):
-    """Prints a text with 2 new lines after each of '.', '?' and ':'.
-
-    Args:
-        text (str): The text to be formatted and printed.
-
-    Raises:
-        TypeError: If text is not a string.
     """
-    if not isinstance(text, str):
+    Prints a text with 2 new lines after each '.', '?', and ':'.
+    """
+    if type(text) is not str:
         raise TypeError("text must be a string")
 
-    c = 0
-    text_len = len(text)
+    # استبدال الرموز بسطرين جديدين، ثم تقسيم النص لتنظيف المسافات الذكية
+    s = text.replace('.', '.\n\n').replace('?', '?\n\n').replace(':', ':\n\n')
+    lines = s.split('\n')
 
-    while c < text_len and text[c] == ' ':
-        c += 1
-
-    while c < text_len:
-        print(text[c], end="")
-        if text[c] in [".", "?", ":"]:
-            print("\n")
-            c += 1
-            while c < text_len and text[c] == ' ':
-                c += 1
-            if c < text_len and text[c] == '\n':
-                c += 1
-                while c < text_len and text[c] == ' ':
-                    c += 1
-            continue
-        c += 1
+    for i in range(len(lines)):
+        if i == len(lines) - 1:
+            print(lines[i].strip(' '), end="")
+        else:
+            print(lines[i].strip(' '))

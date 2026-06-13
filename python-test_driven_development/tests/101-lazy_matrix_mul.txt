@@ -1,14 +1,58 @@
-======================================
-Doctest for 101-lazy_matrix_mul.py
-======================================
+The 101-lazy_matrix_mul module
+==============================
 
->>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+    >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
 
-Test normal multiplication:
->>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
-[[ 7 10]
- [15 22]]
+Correct cases:
+    >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[ 7 10]
+     [15 22]]
 
-Test unequal shapes:
->>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
-[[13 16]]
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
+    [[13 16]]
+
+Errors / Exceptions:
+    >>> lazy_matrix_mul("String", [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a must be a list
+
+    >>> lazy_matrix_mul([[1, 2], [3, 4]], "String")
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b must be a list
+
+    >>> lazy_matrix_mul([], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a can’t be empty
+
+    >>> lazy_matrix_mul([[1, 2], [3, 4]], [])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_b can’t be empty
+
+    >>> lazy_matrix_mul([[1, "2"], [3, 4]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
+
+    >>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, "2"], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+    >>> lazy_matrix_mul([[1, 2], [3, 4, 5]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    ValueError: setting an array element with a sequence.
+
+    >>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4, 5]])
+    Traceback (most recent call last):
+    ...
+    ValueError: setting an array element with a sequence.
+
+    >>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2, 3], [4, 5, 6]])
+    Traceback (most recent call last):
+    ...
+    ValueError: shapes (2,2) and (2,3) not aligned: 2 (dim 1) != 2 (dim 0)

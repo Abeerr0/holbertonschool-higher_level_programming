@@ -25,12 +25,12 @@ Errors / Exceptions:
     >>> lazy_matrix_mul([], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
-    ValueError: m_a can’t be empty
+    ValueError: m_a can't be empty
 
     >>> lazy_matrix_mul([[1, 2], [3, 4]], [])
     Traceback (most recent call last):
     ...
-    ValueError: m_b can’t be empty
+    ValueError: m_b can't be empty
 
     >>> lazy_matrix_mul([[1, "2"], [3, 4]], [[1, 2], [3, 4]])
     Traceback (most recent call last):

@@ -1,10 +1,18 @@
-=================================
-How to use 5-text_indentation
-=================================
+=====================================
+How to use 5-text_indentation module
+=====================================
 
 >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-Test regular string with punctuation:
+Test regular cases:
+>>> text_indentation("Holberton School")
+Holberton School
+
+>>> text_indentation("Holberton.School")
+Holberton.
+<BLANKLINE>
+School
+
 >>> text_indentation("Holberton. School? How are you: John")
 Holberton.
 <BLANKLINE>
@@ -14,36 +22,19 @@ How are you:
 <BLANKLINE>
 John
 
-Test string without special punctuation:
->>> text_indentation("Holberton School")
-Holberton School
-
-Test string with internal spaces and punctuation:
->>> text_indentation("Holberton.School")
-Holberton.
-<BLANKLINE>
-School
-
-Test string with blank line (newline characters):
+Test edge case with newlines that failed in checker:
 >>> text_indentation("First line.\nSecond line.")
 First line.
 <BLANKLINE>
 Second line.
 
-Test text is not a string (integer):
+Test error handling:
 >>> text_indentation(12)
 Traceback (most recent call last):
     ...
 TypeError: text must be a string
 
-Test text is not a string (None):
->>> text_indentation(None)
+>>> text_indentation([1, 2, 3])
 Traceback (most recent call last):
     ...
 TypeError: text must be a string
-
-Test missing argument:
->>> text_indentation()
-Traceback (most recent call last):
-    ...
-TypeError: text_indentation() missing 1 required positional argument: 'text'

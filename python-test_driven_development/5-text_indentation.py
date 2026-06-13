@@ -1,33 +1,38 @@
 #!/usr/bin/python3
 """
-This module provides a function to indent text based on punctuation.
+This module provides a function to indent text based on specific punctuation.
 It contains one function: `text_indentation(text)`.
 """
 
 
 def text_indentation(text):
-    """Prints a text with 2 new lines after each of '.', '?' and ':'.
+    """Prints a text with 2 new lines after each of these characters: ., ? and :
 
     Args:
-        text (str): The text to format and print.
+        text (str): The string to format and print.
 
     Raises:
         TypeError: If text is not a string.
     """
-    if type(text) is not str:
+    if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    i = 0
-    while i < len(text) and text[i] == ' ':
-        i += 1
+    # نستخدم المؤشر (skip_space) لتخطي أي مسافة تأتي في بداية السطر الجديد
+    skip_space = True
 
-    while i < len(text):
-        print(text[i], end="")
-        if text[i] in [".", "?", ":"] or text[i] == "\n":
-            if text[i] in [".", "?", ":"]:
-                print("\n")
-            i += 1
-            while i < len(text) and text[i] == ' ':
-                i += 1
+    for char in text:
+        if skip_space and char == ' ':
             continue
-        i += 1
+        
+        # إذا انتهى السطر الجديد بمحرف سطر جديد أصلي، يجب أيضاً تفعيل تخطي المسافة التالية
+        if char == '\n':
+            print(char, end="")
+            skip_space = True
+            continue
+
+        print(char, end="")
+        skip_space = False
+
+        if char in ['.', '?', ':']:
+            print("\n")
+            skip_space = True

@@ -17,6 +17,11 @@ def lazy_matrix_mul(m_a, m_b):
         return np.matmul(m_a, m_b)
     except ValueError as e:
         err_msg = str(e)
+        
+        # معالجة المصفوفات غير المتساوية (Jagged Arrays)
+        if "setting an array element with a sequence" in err_msg:
+            raise ValueError("setting an array element with a sequence.")
+            
         # معالجة مشكلة عدم توافق الأبعاد (Shapes)
         if "mismatch" in err_msg or "aligned" in err_msg or "size" in err_msg or "shape" in err_msg:
             s_a = np.shape(m_a)
@@ -26,6 +31,7 @@ def lazy_matrix_mul(m_a, m_b):
             dim1 = s_a[1] if len(s_a) > 1 else s_a[0]
             dim0 = s_b[0]
             raise ValueError("shapes {} and {} not aligned: {} (dim 1) != {} (dim 0)".format(str_s_a, str_s_b, dim1, dim0))
+            
         # أي خطأ ValueError آخر نرفعه زي ما هو
         raise e
     except TypeError:

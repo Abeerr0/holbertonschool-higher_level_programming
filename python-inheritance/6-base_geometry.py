@@ -3,7 +3,7 @@
 
 
 class BaseGeometry:
-    """Class that defines a base geometry object with area method."""
+    """Class BaseGeometry."""
 
     def area(self):
         """Raises an Exception since area is not implemented."""

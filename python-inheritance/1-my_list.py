@@ -1,9 +1,5 @@
 #!/usr/bin/python3
-"""Module that defines the MyList class.
-
-This module provides a MyList class that inherits from list
-and adds a method to print the list in sorted order.
-"""
+"""Module that defines the MyList class."""
 
 
 class MyList(list):

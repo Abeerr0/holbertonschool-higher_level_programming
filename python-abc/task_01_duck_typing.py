@@ -3,6 +3,9 @@ from abc import ABC, abstractmethod
 import math
 
 class Shape(ABC):
+    def __init__(self, radius):
+        self.radius = radius
+    
     @abstractmethod
     def area(self):
         pass
@@ -12,9 +15,6 @@ class Shape(ABC):
         pass
 
 class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-    
     def area(self):
         return math.pi * (self.radius ** 2)
     
@@ -23,6 +23,7 @@ class Circle(Shape):
 
 class Rectangle(Shape):
     def __init__(self, width, height):
+        super().__init__(0)
         self.width = width
         self.height = height
     

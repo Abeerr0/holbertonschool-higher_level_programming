@@ -1,0 +1,83 @@
+The ``0-add_integer`` module
+============================
+
+Import function:
+
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Regular addition:
+
+    >>> add_integer(1, 2)
+    3
+
+Addition with negative number:
+
+    >>> add_integer(100, -2)
+    98
+
+Default value:
+
+    >>> add_integer(2)
+    100
+
+Float casting:
+
+    >>> add_integer(100.3, -2)
+    98
+
+Another float casting:
+
+    >>> add_integer(1.4, 2)
+    3
+
+Zero addition:
+
+    >>> add_integer(0, 0)
+    0
+
+Negative numbers:
+
+    >>> add_integer(-5, -5)
+    -10
+
+Wrong type for a:
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+Wrong type for b:
+
+    >>> add_integer(4, "School")
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
+
+Wrong type for a string:
+
+    >>> add_integer("School", 4)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+Float infinity:
+
+    >>> add_integer(float("inf"), 1)
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+Float NaN:
+
+    >>> add_integer(float("nan"), 1)
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
+
+Missing required argument:
+
+    >>> add_integer()
+    Traceback (most recent call last):
+    ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'

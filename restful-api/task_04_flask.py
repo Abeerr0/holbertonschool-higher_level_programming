@@ -1,53 +1,50 @@
 #!/usr/bin/python3
-"""
-Simple Flask API.
-"""
+"""A simple REST API built using Flask."""
 
 from flask import Flask, jsonify, request
 
+
 app = Flask(__name__)
 
-# Users are stored in memory.
-# Leave this empty for the checker.
 users = {}
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home():
-    """Home endpoint."""
+    """Return a welcome message."""
     return "Welcome to the Flask API!"
 
 
-@app.route("/data", methods=["GET"])
+@app.route("/data")
 def get_data():
-    """Return all usernames."""
+    """Return a list of all stored usernames."""
     return jsonify(list(users.keys()))
 
 
-@app.route("/status", methods=["GET"])
+@app.route("/status")
 def status():
-    """API status."""
+    """Return the current API status."""
     return "OK"
 
 
-@app.route("/users/<username>", methods=["GET"])
+@app.route("/users/<username>")
 def get_user(username):
-    """Return a user's information."""
-    if username in users:
-        return jsonify(users[username])
+    """Return the user matching the provided username."""
+    if username not in users:
+        return jsonify({"error": "User not found"}), 404
 
-    return jsonify({"error": "User not found"}), 404
+    return jsonify(users[username])
 
 
 @app.route("/add_user", methods=["POST"])
 def add_user():
-    """Add a new user."""
-    data = request.get_json(silent=True)
+    """Add a new user from the received JSON data."""
+    user_data = request.get_json(silent=True)
 
-    if data is None:
+    if user_data is None:
         return jsonify({"error": "Invalid JSON"}), 400
 
-    username = data.get("username")
+    username = user_data.get("username")
 
     if not username:
         return jsonify({"error": "Username is required"}), 400
@@ -55,11 +52,11 @@ def add_user():
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
 
-    users[username] = data
+    users[username] = user_data
 
     return jsonify({
         "message": "User added",
-        "user": data
+        "user": user_data
     }), 201
 
 

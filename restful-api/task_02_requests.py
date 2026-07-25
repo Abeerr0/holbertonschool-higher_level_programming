@@ -1,50 +1,48 @@
 #!/usr/bin/python3
-"""
-Module for fetching and processing posts from JSONPlaceholder API.
-"""
+"""Fetch and process posts from an API."""
 
 import csv
 import requests
 
 
-URL = "https://jsonplaceholder.typicode.com/posts"
-
-
 def fetch_and_print_posts():
-    """
-    Fetch all posts and print the response status code and post titles.
-    """
-    response = requests.get(URL)
-    print(f"Status Code: {response.status_code}")
+    """Fetch posts from the API and print their titles."""
+    url = "https://jsonplaceholder.typicode.com/posts"
+    response = requests.get(url)
+
+    print("Status Code: {}".format(response.status_code))
 
     if response.status_code == 200:
         posts = response.json()
+
         for post in posts:
             print(post["title"])
 
 
 def fetch_and_save_posts():
-    """
-    Fetch all posts and save selected data to posts.csv.
-    """
-    response = requests.get(URL)
+    """Fetch posts from the API and save selected data in a CSV file."""
+    url = "https://jsonplaceholder.typicode.com/posts"
+    response = requests.get(url)
 
     if response.status_code == 200:
         posts = response.json()
 
-        data = [
-            {
+        post_data = []
+
+        for post in posts:
+            post_data.append({
                 "id": post["id"],
                 "title": post["title"],
                 "body": post["body"]
-            }
-            for post in posts
-        ]
+            })
 
-        with open("posts.csv", "w", newline="", encoding="utf-8") as csvfile:
+        with open("posts.csv", "w", newline="", encoding="utf-8") as csv_file:
+            fieldnames = ["id", "title", "body"]
+
             writer = csv.DictWriter(
-                csvfile,
-                fieldnames=["id", "title", "body"]
+                csv_file,
+                fieldnames=fieldnames
             )
+
             writer.writeheader()
-            writer.writerows(data)
+            writer.writerows(post_data)

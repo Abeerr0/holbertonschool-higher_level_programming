@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
-"""Basic serialization module."""
+#!/usr/bin/python3
+"""This module provides basic JSON serialization and deserialization."""
+
 import json
 
 
@@ -10,6 +11,6 @@ def serialize_and_save_to_file(data, filename):
 
 
 def load_and_deserialize(filename):
-    """Load and deserialize a dictionary from a JSON file."""
+    """Load JSON data from a file and deserialize it into a dictionary."""
     with open(filename, "r", encoding="utf-8") as file:
         return json.load(file)

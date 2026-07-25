@@ -1,17 +1,22 @@
 #!/usr/bin/python3
-"""Deletes all State objects with a name containing the letter 'a'."""
+"""Creates California with San Francisco using relationship."""
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+from relationship_state import Base, State
+from relationship_city import City
 
 if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
         sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    states = session.query(State).filter(State.name.like('%a%')).all()
-    for state in states:
-        session.delete(state)
+
+    california = State(name="California")
+    san_francisco = City(name="San Francisco")
+    california.cities.append(san_francisco)
+
+    session.add(california)
     session.commit()
     session.close()

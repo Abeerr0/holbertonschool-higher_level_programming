@@ -1,7 +1,10 @@
 #!/usr/bin/python3
-"""Displays all values in states safe from MySQL injections."""
+"""
+Script safe from MySQL injections to filter states by user input.
+"""
 import MySQLdb
 import sys
+
 
 if __name__ == "__main__":
     db = MySQLdb.connect(
@@ -12,7 +15,10 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC", (sys.argv[4],))
+    cursor.execute(
+        "SELECT * FROM states WHERE name = %s ORDER BY states.id ASC",
+        (sys.argv[4],)
+    )
     rows = cursor.fetchall()
     for row in rows:
         print(row)
